@@ -20,7 +20,7 @@ genderdata <- read.csv(here::here("HDR21-22_Composite_indices_complete_time_seri
 ##read spatial data (shp)
 worlddata <- st_read(here::here("World_Countries__Generalized_.shp"))
 worlddata <- worlddata %>%
-  st_set_crs(4326) %>%
+  st_transform(3857)
   clean_names()
 ```
 
@@ -45,7 +45,7 @@ tm_shape(world_gender2) +
               alpha = 0.5) + 
   tm_compass(position = c("left", "bottom"),type = "arrow",size = 1) + 
   tm_scale_bar(position = c("left", "bottom")) +
-  tm_layout(title = "Differences of Gender Inequality Index between 2010 and 2019", legend.position = c("right", "bottom"))
+  tm_layout(title = "Differences of Gender Inequality Index between 2010 and 2019",title.size = 1,title.position = c("center","top"), legend.position = c("right", "bottom"))
 
 ```
 
