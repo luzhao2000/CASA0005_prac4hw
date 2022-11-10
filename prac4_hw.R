@@ -9,7 +9,6 @@ library(tmap)
 library(tmaptools)
 install.packages("RColorBrewer")
 library(RColorBrewer)
-
 ```
 
 ```{r}
