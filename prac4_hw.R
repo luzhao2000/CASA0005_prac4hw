@@ -1,4 +1,4 @@
-```{r}
+
 library(tidyverse)
 library(here)
 install.packages("janitor")
@@ -9,9 +9,8 @@ library(tmap)
 library(tmaptools)
 install.packages("RColorBrewer")
 library(RColorBrewer)
-```
 
-```{r}
+
 ##read gender inequality csv data
 genderdata <- read.csv(here::here("HDR21-22_Composite_indices_complete_time_series.csv"), 
                        header = TRUE, sep = ",",  
@@ -19,11 +18,9 @@ genderdata <- read.csv(here::here("HDR21-22_Composite_indices_complete_time_seri
 ##read spatial data (shp)
 worlddata <- st_read(here::here("World_Countries__Generalized_.shp"))
 worlddata <- worlddata %>%
-  st_transform(3857)
+  st_transform(3857) %>%
   clean_names()
-```
 
-```{r}
 ##join data and calculate gii difference between 2010 and 2019
 world_gender1 <- worlddata %>%
   left_join(., 
@@ -32,9 +29,8 @@ world_gender1 <- worlddata %>%
   dplyr::select(c(`country`,`gii_2010`,`gii_2019`))
 world_gender2 <- world_gender1 %>%
   mutate(difference = gii_2019 - gii_2010)
-```
 
-```{r}
+
 tm_shape(world_gender2) + 
   tm_polygons("difference", 
               style="pretty",
@@ -46,5 +42,4 @@ tm_shape(world_gender2) +
   tm_scale_bar(position = c("left", "bottom")) +
   tm_layout(title = "Differences of Gender Inequality Index between 2010 and 2019",title.size = 1,title.position = c("center","top"), legend.position = c("right", "bottom"))
 
-```
 
